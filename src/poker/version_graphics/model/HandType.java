@@ -16,7 +16,7 @@ public enum HandType {
 	 */
 	public static HandType evaluateHand(ArrayList<Card> cards) {
 		HandType currentEval = HighCard;
-
+//difjeowf
 		if (isOnePair(cards))
 			currentEval = OnePair;
 		if (isTwoPair(cards))
