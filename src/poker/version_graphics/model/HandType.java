@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import poker.version_graphics.model.Card.Rank;
 import poker.version_graphics.model.Card.Suit;
+//hi 
 
 public enum HandType {
 	HighCard, OnePair, TwoPair, ThreeOfAKind, Straight, Flush, FullHouse, FourOfAKind, StraightFlush,RoyalFlush;
