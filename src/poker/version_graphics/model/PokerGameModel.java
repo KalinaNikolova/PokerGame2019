@@ -57,8 +57,7 @@ public  Player win() { //determine winner
 			}
 			
 			else if (players.get(i).compareTo(winner)==0) {
-		//	System.out.println(HandType.evaluateHand(players.get(i).getCards()));
-				HandType.evaluateHand(players.get(i).getCards());  //gets handtype
+				HandType.evaluateHand(players.get(i).getCards());  //gets hand type
 		
 			TieBreak tie = new TieBreak(players.get(i).getCards(),players.get(winnerint).getCards(), 
 					HandType.evaluateHand(players.get(i).getCards()).toString());
@@ -73,10 +72,7 @@ public  Player win() { //determine winner
 			else if(player==2) {
 				winner=players.get(1);
 			} 
-		//	winner=players.get(player);   // set winners number =, 0 based
-				//get cards compare them
-				// call method return winner
-			}
+		     }
 		}
 		return winner;		
 	}	
