@@ -180,7 +180,7 @@ public enum HandType {
            return isStraight;
        }
        
-       private static int [] getValueList(ArrayList <Card> cards) {
+        public static int [] getValueList(ArrayList <Card> cards) {  //used by TieBreak as well
        	int [] valueCards = new int[cards.size()];
            for(int i=0;i<cards.size();i++) {
            	valueCards[i]=cards.get(i).getOrdinal();
