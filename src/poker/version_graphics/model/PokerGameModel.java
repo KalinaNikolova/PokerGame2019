@@ -43,16 +43,41 @@ public class PokerGameModel {
 		return true;
 		
 	}
-	public Player win() {
+public  Player win() { //determine winner
 		
 		Player winner= players.get(0);
+		int winnerint=0;
+		int player;
+		//test
+		
 		for(int i=1; i<players.size(); i++) {
 			if(players.get(i).compareTo(winner)>0) {
 				winner= players.get(i);
+				winnerint=i;	//first the best hand will set the number, if we have a tie, we compare this number to i	
+			}
+			
+			else if (players.get(i).compareTo(winner)==0) {
+		//	System.out.println(HandType.evaluateHand(players.get(i).getCards()));
+				HandType.evaluateHand(players.get(i).getCards());  //gets handtype
+		
+			TieBreak tie = new TieBreak(players.get(i).getCards(),players.get(winnerint).getCards(), 
+					HandType.evaluateHand(players.get(i).getCards()).toString());
+			System.out.println("Round1: "+players.get(i).getCards());	
+			System.out.println("Round1: "+players.get(winnerint).getCards());
+			
+			player=tie.getWinnerTie();
+			winner=players.get(1);
+			if (player==1) {
+				winner=players.get(0);
+			}
+			else if(player==2) {
+				winner=players.get(1);
+			} 
+		//	winner=players.get(player);   // set winners number =, 0 based
+				//get cards compare them
+				// call method return winner
 			}
 		}
-		return winner;
-	}
-	
-	
+		return winner;		
+	}	
 }
