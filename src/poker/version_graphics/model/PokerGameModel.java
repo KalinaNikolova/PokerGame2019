@@ -61,11 +61,8 @@ public  Player win() { //determine winner
 		
 			TieBreak tie = new TieBreak(players.get(i).getCards(),players.get(winnerint).getCards(), 
 					HandType.evaluateHand(players.get(i).getCards()).toString());
-			System.out.println("Round1: "+players.get(i).getCards());	
-			System.out.println("Round1: "+players.get(winnerint).getCards());
 			
 			player=tie.getWinnerTie();
-			winner=players.get(1);
 			if (player==1) {
 				winner=players.get(0);
 			}
