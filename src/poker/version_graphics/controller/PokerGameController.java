@@ -79,10 +79,16 @@ public class PokerGameController {
 		}
 	}
 
-	private void win() {
+	private void win()
 		
+		try {
 		Player winner = model.win();
 		view.getWinnerLabel().setText(winner.getPlayerName());
+			
+			}
+		catch (IndexOutOfBoundsException e) {
+			view.getWinnerLabel().setText("Tie");			
+		}	
 	}
 
 	private void addPlayer() {
