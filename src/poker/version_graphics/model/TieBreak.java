@@ -68,10 +68,18 @@ public class TieBreak {
         	else if(TieBreak.getPair(valueList1)<TieBreak.getPair(valueList2)) {
         		winner=2;
         	}
-        	else { winner=TieBreak.getWDeck(valueList1, valueList2);
-        		
-        	}        	
-        	
+          	else { 
+		   for(int i=valueList1.length-1;i>=0;i--) {
+        		if(valueList1[i]>valueList2[i]) {
+        			winner=1;
+        			break;
+        			}
+        		else if(valueList1[i]<valueList2[i]) {
+        			winner=2;
+        			break;
+        			}
+        		}
+        	   }    	
 		}
     
         break;         
