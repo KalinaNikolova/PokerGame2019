@@ -70,7 +70,8 @@ public  Player win() { //determine winner
 				else if(player==2) {
 					winner=players.get(i);
 					winnerint=i;
-				} 			
+				}
+				else winner=players.get(player);		//in case of a tie
 			}
 		}
 		return winner;		
