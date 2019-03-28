@@ -20,11 +20,15 @@ public class PokerGameView {
 	private TopMenu topMenu;
 	private PokerGameModel model;
 	private TilePane players= new TilePane();
-	BorderPane root;
+	private BorderPane root;
+	private Stage stage;
+
 
 	public PokerGameView(Stage stage, PokerGameModel model) {
 		this.model = model;
+		this.stage= stage;
 	
+		
 		// Create all of the player panes we need, and put them into an HBox
 		//players = new HBox();
 		players= new TilePane();
@@ -47,14 +51,42 @@ public class PokerGameView {
 		root.setCenter(players);
 		root.setBottom(controls);
 		
-		// Create the scene using our layout; then display it
-		Scene scene = new Scene(root,1400,700);
-		scene.getStylesheets().add(getClass().getResource("poker.css").toExternalForm());
+		// Create new stage
+		createScene(randomCss());
+	}
+	public void createScene(String css) {
+		
+		Scene scene = new Scene(this.root, 1600,650);
+		scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
 		stage.setTitle("Poker Miniproject");
 		stage.setScene(scene);
 		stage.show();
 	}
-	public void addPlayer(PokerGameModel model, int i) {
+	
+	public void createMenuStage(String css, Label lbl, HBox hBox) {
+		Scene scene = new Scene(hBox);
+		Stage menuStage= new Stage();
+		hBox.getChildren().add(lbl);
+		scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+		menuStage.setTitle("Poker Rules");
+		menuStage.setScene(scene);
+		menuStage.show();
+		
+		
+	}
+
+	public static String randomCss() {
+		ArrayList<String> myCss= new ArrayList<>();
+		myCss.add("red.css");
+		myCss.add("blue.css");
+		myCss.add("poker.css");
+		Random gen= new Random();
+		int myGen= gen.nextInt(3);
+		String css= myCss.get(myGen);
+		
+		return css;
+	}
+		public void addPlayer(PokerGameModel model, int i) {
 		PlayerPane pp = new PlayerPane();
 
 		//HBox.setHgrow(pp, Priority.ALWAYS);// K: center(resize area) the cards //no need
@@ -62,6 +94,36 @@ public class PokerGameView {
 		pp.setPlayer(model.getPlayer(i)); // link to player object in the logic
 		players.getChildren().add(pp);
 	}
+
+
+	public ControlArea getControls() {
+	return controls;
+	}
+	public void setControls(ControlArea controls) {
+	this.controls = controls;
+	}
+	public PokerGameModel getModel() {
+	return model;
+	}
+	public void setModel(PokerGameModel model) {
+	this.model = model;
+	}
+	public TilePane getPlayers() {
+	return players;
+	}
+	public void setPlayers(TilePane players) {
+	this.players = players;
+	}
+	public BorderPane getRoot() {
+	return root;
+	}
+	public void setRoot(BorderPane root) {
+	this.root = root;
+	}
+	public void setTopMenu(TopMenu topMenu) {
+	this.topMenu = topMenu;
+	}
+
 	public MenuItem getAboutItem() {
 		return topMenu.about;
 	}
@@ -73,9 +135,6 @@ public class PokerGameView {
 	}
 	public MenuItem getNewGameItem() {
 		return topMenu.newGame;
-	}
-	public MenuItem getChangeCoverImage() {
-		return topMenu.image;
 	}
 	public MenuItem getCloseItem() {
 		return topMenu.close;
@@ -102,6 +161,9 @@ public class PokerGameView {
 		return controls.btnWinner;
 	}
 
+	public Button getRemovePlayerButton() {
+		return controls.btnRemovePlayer;
+	}
 	public Button getAddPlayerButton() {
 		return controls.btnAddPlayer;
 	}
@@ -109,7 +171,4 @@ public class PokerGameView {
 	public Label getWinnerLabel() {
 		return controls.lblWinner;
 	}
-
-	
-
 }
