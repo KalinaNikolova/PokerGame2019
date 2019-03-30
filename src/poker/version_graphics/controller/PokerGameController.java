@@ -1,14 +1,15 @@
 package poker.version_graphics.controller;
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.util.Duration;
 import poker.version_graphics.model.Card;
 import poker.version_graphics.model.DeckOfCards;
 import poker.version_graphics.model.Player;
 import poker.version_graphics.model.PokerGameModel;
-
 import poker.version_graphics.view.PlayerPane;
 import poker.version_graphics.view.PokerGameView;
 
