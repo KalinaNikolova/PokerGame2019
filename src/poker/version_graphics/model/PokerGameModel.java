@@ -1,5 +1,4 @@
 package poker.version_graphics.model;
-
 import java.util.ArrayList;
 
 import poker.version_graphics.PokerGame;
@@ -43,16 +42,20 @@ public class PokerGameModel {
 		return true;
 		
 	}
-public  Player win() { //determine winner
-				
+public String win() {
+	
 		Player winner= players.get(0);
 		int winnerint=0;
 		int player;
+		ArrayList<Integer> count = new ArrayList<>();
+		String winnerstr=players.get(0).getPlayerName();
+	
 		//test
 		for(int i=1; i<players.size(); i++) {
 			if(players.get(i).compareTo(winner)>0) {
 				winner= players.get(i);
-				winnerint=i;	//sets the position of the currently highest hand
+				winnerint=i;	//sets the position of the currently highest hand	
+				winnerstr=players.get(i).getPlayerName();
 			}
 		}
 		
@@ -62,18 +65,37 @@ public  Player win() { //determine winner
 				
 				TieBreak tie = new TieBreak(players.get(i).getCards(),players.get(winnerint).getCards(), 
 						HandType.evaluateHand(players.get(i).getCards()).toString());
-
+				
 				player=tie.getWinnerTie();
 				if (player==1) {
 					winner=players.get(winnerint);
+					winnerstr= players.get(winnerint).getPlayerName();
 				}
 				else if(player==2) {
 					winner=players.get(i);
 					winnerint=i;
-				}
-				else winner=players.get(player);		//in case of a tie
-			}
-		}
-		return winner;		
+					winnerstr= players.get(i).getPlayerName();
+				} 
+				else if(player==-1) {//in case of a tie
+					boolean containsI=false;
+					boolean containsW=false;
+					
+					if(count.contains(winnerint)) containsW=true;
+					if(count.contains(i)) containsI=true;
+					
+					if(!containsW) count.add(winnerint);
+					if(!containsI) count.add(i);					
+					
+					String string="Tie -";
+					for(int k=0;k<count.size();k++) {
+						System.out.println(string += " "+ players.get(count.get(k)).getPlayerName());
+						}
+				
+					winnerstr=string;					
+					}
+				   }	
+			}		
+		
+		return winnerstr; 		
 	}	
 }
