@@ -83,14 +83,10 @@ public class PokerGameController {
 	}
 
 	private void win() {
-
-		try {
-			Player winner = model.win();
-			view.getWinnerLabel().setText(winner.getPlayerName());
-
-		} catch (IndexOutOfBoundsException e) {
-			view.getWinnerLabel().setText("Tie");
-		}
+		String content=("");
+		view.getWinnerLabel().setStyle("-fx-text-fill: #FB0505");		
+		content=model.win();
+		animation("Winner: " + content);
 	}
 
 	private void removePlayer() {
@@ -126,23 +122,23 @@ public class PokerGameController {
 
 	public void hands() {
 		Label lbl= new Label("\t\t\t\tHands Ranking\n\n"
-				+ "1. Royal flush: A, K, Q, J, 10, all the same suit. \n\n"
-				+ "2. Straight Flush: Five cards in a sequence, all in the same suit.\n\n"
-				+ "3. Four of a kind: All four cards of the same rank.\n\n"
-				+ "4. Full house: Three of a kind with a pair.\n\n"
+				+ "1. Royal Flush: A, K, Q, J, 10, all the same suit. \n\n"
+				+ "2. Straight Flush: Five cards in a sequence, all of the same suit.\n\n"
+				+ "3. Four of a Kind: All four cards of the same rank.\n\n"
+				+ "4. Full House: Three cards of the same rank and two cards of a different matching rank.\n\n"
 				+ "5. Flush: Any five cards of the same suit, but not in a sequence.\n\n"
 				+ "6. Straight: Five cards in a sequence, but not of the same suit.\n\n"
-				+ "7. Three of a kind: Three cards of the same rank.\n\n"
-				+ "8. Two pair: Two different pairs."
+				+ "7. Three of a Kind: Three cards of the same rank.\n\n"
+				+ "8. Two Pair: Two different pairs."
 				+ "9. Pair: Two cards of the same rank."
-				+ "10. Hight card: When you haven't made any "
+				+ "10. High Card: When you haven't made any "
 				+ "of the hands above, the highest card plays.\t\t");
 		view.createMenuStage("topMenuStage.css",lbl,new HBox());
 	}
 	public void genRules() {
 		Label lbl= new Label("\t\t\t\tGENERAL RULES:\n\nThis is a \"5 Cards Stud\""
 				+ " simpliest version of poker.\nUse a standart deck of 52 cards. In each round\n"
-				+ "there is a Winner or is a Tie depend on the type of hand that players hold.\n"
+				+ "there is a winner or a tie depending on the type of hand that the players hold.\n"
 				+ "For more information about hand ranking, go to \"Help-> RUles-> Hands\" menu\t\t\n\n");
 		view.createMenuStage("topMenuStage.css", lbl,new HBox());
 	}
@@ -152,5 +148,19 @@ public class PokerGameController {
 				" 2nd semester in FHNW, Basel, 2019. \t\t");
 		view.createMenuStage("topMenuStage.css", lbl,new HBox());//createStage(lbl);
 		
+	}
+		public void animation(String content) {
+			
+		  Transition animation = new Transition() {
+		     {
+		         setCycleDuration(Duration.millis(2000));
+		     }		 
+		     protected  void interpolate(double split) {
+		         final int length = content.length();
+		         final int n = Math.round(length * (float) split);
+		         view.getWinnerLabel().setText(content.substring(0, n));
+		     }		 
+		 };				 
+		 animation.play();
 	}
 }
